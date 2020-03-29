@@ -1,0 +1,64 @@
+{
+    "name": "from_off_to_on",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "debug": "NODE_ENV=dev gulp",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/akihiroxob/from_off_to_on.git"
+    },
+    "author": "akihiro okayama",
+    "bugs": {
+        "url": "https://github.com/akihiroxob/from_off_to_on/issues"
+    },
+    "homepage": "https://github.com/akihiroxob/from_off_to_on#readme",
+    "dependencies": {
+        "@babel/polyfill": "^7.8.7",
+        "@babel/preset-env": "^7.9.0",
+        "@babel/preset-react": "^7.9.4",
+        "@babel/register": "^7.9.0",
+        "eventemitter3": "^4.0.0",
+        "express": "^4.17.1",
+        "express-react-views": "^0.11.0",
+        "immutable": "^4.0.0-rc.12",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-redux": "^7.2.0",
+        "redux": "^4.0.5",
+        "redux-thunk": "^2.3.0",
+        "skyway-js": "^2.0.5",
+        "socket.io": "^2.3.0",
+        "socket.io-client": "^2.3.0",
+        "ws": "^7.2.3"
+    },
+    "babel": {
+        "presets": [
+            "@babel/preset-react",
+            [
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ]
+        ]
+    },
+    "devDependencies": {
+        "babel-loader": "^8.1.0",
+        "gulp": "^4.0.2",
+        "gulp-mocha": "^7.0.2",
+        "gulp-nodemon": "^2.5.0",
+        "gulp-options": "^1.1.1",
+        "gulp-plumber": "^1.2.1",
+        "gulp-stylus": "^2.7.0",
+        "gulp-util": "^3.0.8",
+        "nib": "^1.1.2",
+        "webpack": "^4.42.1",
+        "webpack-stream": "^5.2.1"
+    }
+}
