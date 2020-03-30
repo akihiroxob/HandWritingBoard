@@ -1,32 +1,24 @@
-import React from 'react';
-import ReactDom from 'react-dom';
-import {Provider} from 'react-redux';
+(() => {
+    const ENTER = 13;
+    window.addEventListener('load', () => {
+        const input = document.getElementById('js-boardname');
+        const button = document.getElementById('js-submit');
 
-import configureStore from './store/configureStore';
-import Board from './components/Board';
-import * as GlobalAction from './actions/global';
+        // input something to this textfield
+        input.addEventListener('keydown', event => {
+            const keycode = event.which || event.keyCode;
+            if (keycode === ENTER) {
+                button.click();
+            }
+        });
 
-// ready to initial
-// initialize
-const store = configureStore();
-
-store.dispatch(GlobalAction.addGlobalOnResize());
-document.addEventListener(
-    'touchstart',
-    event => {
-        if (event.touches.length > 1) {
-            event.preventDefault();
-        }
-    },
-    {
-        passive: false
-    }
-);
-
-// Render
-ReactDom.render(
-    <Provider store={store}>
-        <Board />
-    </Provider>,
-    document.getElementById('wrapper')
-);
+        // click button
+        button.addEventListener('click', () => {
+            let room = input.value;
+            room = room.replace(/\W_/g, '').trim();
+            if (room) {
+                window.open(`/${room}`, '_self');
+            }
+        });
+    });
+})();

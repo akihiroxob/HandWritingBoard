@@ -9,25 +9,23 @@ class Board {
     init() {
         return dispatch => {
             this.websocket = WebSocket.getInstance();
-            console.log('board constructor');
 
             this.websocket.on('connection', () => {
-                console.log('connection');
                 Capture.getCamera().then(stream => {
                     this.localStream = stream;
                     this.peer = Peer.getInstance(this.localStream);
                     this.peer.on('open', () => {
                         this.websocket.joinToChannel(this.peer.id);
                         this.peer.joinToRoom('general');
+                        dispatch({
+                            type: Const.INIT,
+                            payload: {peerId: this.peer.id}
+                        });
                     });
                 });
             });
 
             this.websocket.on('join', data => {
-                //Capture.getCamera().then(stream => {
-                //    this.peer.localStream = stream;
-                //});
-                console.log('join');
                 dispatch(this.join(data));
             });
 
@@ -107,7 +105,7 @@ class Board {
             type: Const.JOIN,
             payload: {
                 joinId: data.newId,
-                remoteIds: data.remoteIds
+                remoteIds: data.allIds
             },
             meta: {}
         };
@@ -123,7 +121,8 @@ class Board {
         return {
             type: Const.REFRESH_IMG,
             payload: {
-                imgBase64: data.base64
+                imgBase64: data.base64,
+                peerId: data.peerId
             }
         };
     }
@@ -133,7 +132,7 @@ class Board {
             type: Const.EXIT,
             payload: {
                 removeId: data.removeId,
-                remoteIds: data.remoteIds
+                remoteIds: data.allIds
             },
             meta: {}
         };
@@ -143,12 +142,14 @@ class Board {
         if (this.peer.id === peerId) {
             document.getElementById('myvideo').classList.remove('is-disable');
             return {
-                type: Const.SHOW_MY_VIDEO
+                type: Const.SHOW_MY_VIDEO,
+                payload: {peerId}
             };
         } else {
             document.getElementById(peerId).classList.remove('is-disable');
             return {
-                type: Const.SHOW_VIDEO
+                type: Const.SHOW_VIDEO,
+                payload: {peerId}
             };
         }
     }

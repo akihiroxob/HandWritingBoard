@@ -13,7 +13,8 @@ const CSS_DEST_DIR = './assets/css';
 export const webpack = {
     mode: 'production',
     entry: {
-        index: CLIENT_DIR + '/index'
+        index: CLIENT_DIR + '/index',
+        board: CLIENT_DIR + '/board'
     },
     output: {
         filename: '[name].bundle.js',

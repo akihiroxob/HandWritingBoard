@@ -13,7 +13,7 @@ export default class Peer {
 
 class PeerClient extends SkyWay {
     constructor(localStream) {
-        super({key: process.env.API_KEY});
+        super({key: '08f36246-7c37-465c-90c1-bd1173a9a009'});
         this.videoList = document.getElementById('board');
         this.localStream = localStream;
     }

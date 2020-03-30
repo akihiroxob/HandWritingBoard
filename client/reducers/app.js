@@ -2,6 +2,9 @@ import {Map} from 'immutable';
 import * as Const from '../constants';
 
 export const initialState = Map({
+    room: '',
+    peerId: '',
+    turnId: '',
     board: {
         width: 0,
         height: 0
@@ -19,6 +22,9 @@ const app = (state = initialState, action) => {
         case Const.RESIZE: {
             return state.set('board', action.payload.board);
         }
+        case Const.INIT: {
+            return state.set('peerId', action.payload.peerId);
+        }
 
         case Const.JOIN:
         case Const.Exit: {
@@ -26,16 +32,21 @@ const app = (state = initialState, action) => {
         }
 
         case Const.SHOW_MY_VIDEO: {
-            return state.set('state', 'my');
+            return state
+                .set('state', 'my')
+                .set('turnId', action.payload.peerId);
         }
 
         case Const.SHOW_VIDEO: {
-            return state.set('state', 'mate');
+            return state
+                .set('state', 'mate')
+                .set('turnId', action.payload.peerId);
         }
         case Const.REFRESH_IMG: {
             return state
                 .set('img', action.payload.imgBase64)
-                .set('state', 'none');
+                .set('state', 'none')
+                .set('turnId', '');
         }
 
         default: {

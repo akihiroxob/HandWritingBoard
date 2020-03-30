@@ -64,7 +64,8 @@ export function addGlobalOnResize() {
     return function(dispatch) {
         function globalResize(event) {
             const width = window.innerWidth;
-            const height = window.innerHeight;
+            //const height = window.innerHeight;
+            const height = document.getElementById('board').clientHeight;
 
             const board = {width, height};
             dispatch({
@@ -75,7 +76,7 @@ export function addGlobalOnResize() {
         }
 
         // initial. will move this initial function later
-        globalResize();
+        window.addEventListener('load', globalResize);
         window.addEventListener('resize', globalResize);
     };
 }
