@@ -13,7 +13,7 @@ export default class Peer {
 
 class PeerClient extends SkyWay {
     constructor(localStream) {
-        super({key: API_KEY});
+        super({key: process.env.API_KEY});
         this.videoList = document.getElementById('board');
         this.localStream = localStream;
     }
@@ -29,6 +29,7 @@ class PeerClient extends SkyWay {
             newVideo.srcObject = stream;
             newVideo.playsInline = true;
             newVideo.autoplay = true;
+            newVideo.volume = 0.75;
             // mark peerId to find it later at peerLeave event
             newVideo.setAttribute('id', stream.peerId);
             newVideo.classList.add('is-disable');

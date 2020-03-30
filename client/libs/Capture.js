@@ -4,7 +4,7 @@ navigator.getUserMedia =
     navigator.mozGetUserMedia;
 
 const medias = {
-    audio: false,
+    audio: true,
     video: {
         facingMode: {
             exact: 'environment'
@@ -13,12 +13,22 @@ const medias = {
     }
 };
 
+const macMedias = {
+    audio: true,
+    video: true
+};
+
 const THRESHOLD = 65;
 export default class Capture {
     static getCamera() {
-        return navigator.mediaDevices.getUserMedia(medias).then(stream => {
-            return stream;
-        });
+        return navigator.mediaDevices
+            .getUserMedia(medias)
+            .then(stream => {
+                return stream;
+            })
+            .catch(() => {
+                return navigator.mediaDevices.getUserMedia(macMedias);
+            });
     }
 
     static toBinary(src, dst) {

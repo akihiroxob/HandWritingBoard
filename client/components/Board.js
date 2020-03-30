@@ -4,6 +4,7 @@ import Action from '../actions/board';
 
 class Board extends React.Component {
     componentDidMount() {
+        document.getElementById('myvideo').muted = true;
         this.props.init();
     }
 
@@ -16,7 +17,12 @@ class Board extends React.Component {
                     height={this.props.board.height}
                 ></canvas>
                 <img src={this.props.img} />
-                <video id="myvideo" className="is-disable" playsInline></video>
+                <video
+                    id="myvideo"
+                    className="is-disable"
+                    playsInline
+                    muted
+                ></video>
             </div>
         );
     }
