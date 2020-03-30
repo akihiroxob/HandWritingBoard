@@ -43,6 +43,11 @@ const app = (state = initialState, action) => {
                 .set('turnId', action.payload.peerId);
         }
         case Const.REFRESH_IMG: {
+            const board = state.get('board');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, board.width, board.height);
+
             return state
                 .set('img', action.payload.imgBase64)
                 .set('state', 'none')

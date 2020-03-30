@@ -28,6 +28,7 @@ class PeerClient extends SkyWay {
             const newVideo = document.createElement('video');
             newVideo.srcObject = stream;
             newVideo.playsInline = true;
+            newVideo.autoplay = true;
             // mark peerId to find it later at peerLeave event
             newVideo.setAttribute('id', stream.peerId);
             newVideo.classList.add('is-disable');
